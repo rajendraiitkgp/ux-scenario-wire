@@ -1,0 +1,16 @@
+services:
+  backend:
+    build: ./backend
+    env_file: ./backend/.env
+    ports: ["8787:8787"]
+    volumes: ["./data:/app/data"]
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ux_scenario_agent
+      POSTGRES_USER: ux_agent
+      POSTGRES_PASSWORD: ux_agent_password
+    volumes: ["ux_agent_pg:/var/lib/postgresql/data"]
+    ports: ["5432:5432"]
+volumes:
+  ux_agent_pg:
